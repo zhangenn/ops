@@ -1,0 +1,39 @@
+    <!-- include dice source.-->
+    <script src="https://github.com/tschiemer/qualtrics-gambling/blob/master/dice/dice.js" type="text/javascript"></script>
+
+    <!-- an alternative approach to encorporating the javascript source is to embed it directly, uncomment as necessary -->
+    <script type="text/javascript">
+    .. include complete dice.js file here    
+    </script>
+
+                    
+    <!-- Actual dice html here -->
+    <div id="dice"></div>
+    <br>
+    <button id="throw">Throw dice!</button>
+
+    <!-- Instantiate dice here. As results are not stored, it need not be added to a javascript block. -->
+    <script type="text/javascript">
+    new Dice('dice','throw',{
+        value_set: [
+            {key: '1',probability: 1},
+            {key: '2',probability: 1},
+            {key: '3',probability: 1},
+            {key: '4',probability: 1},
+            {key: '5',probability: 1},
+            {key: '6',probability: 1}
+        ],
+        images : {
+            base_url: 'https://github.com/tschiemer/qualtrics-gambling/tree/master/dice/img',
+            ext: '.png',
+            init: 'qmark1.png'
+        },
+        result_callback: function(throw_nr,result_key){
+
+            // Save result to embedded data field (need
+            //not be set through survey flow settings)
+            Qualtrics.SurveyEngine.setEmbeddedData('result_matrix_embedded'+throw_nr, result_key);
+
+        }
+    });
+    </script>
